@@ -10,7 +10,6 @@ def backup_mongodb(source_uri, backup_dir):
     client = pymongo.MongoClient(source_uri)
 
     try:
-        # Create the backup directory if it doesn't exist
         os.makedirs(backup_dir, exist_ok=True)
 
         db_names = client.list_database_names()
@@ -85,7 +84,7 @@ def restore_mongodb(target_uri, backup_dir):
 
                 print(f"Restoring collection {collection_name} in db {db_name}")
 
-                filepath = os.path.join(backup_dir, filename)  # Construct full filepath from directory and filename
+                filepath = os.path.join(backup_dir, filename)
 
                 with open(filepath, "r") as f:
                     documents = json.load(f)
